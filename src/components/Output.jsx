@@ -18,7 +18,8 @@ const Output = ({ editorRef, language }) => {
     if (!sourceCode) return;
     try {
       setIsLoading(true);
-      const { run: result } = await executeCode(language, sourceCode, input);
+      const inputarray = input.split(" ").filter(arg => arg.trim() !== "");
+      const { run: result } = await executeCode(language, sourceCode, inputarray);
       setOutput(result.output.split("\n"));
       result.stderr ? setIsError(true) : setIsError(false);
     } catch (error) {
